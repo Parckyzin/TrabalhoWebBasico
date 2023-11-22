@@ -1,6 +1,6 @@
 <!--
     esta pagina foi retirada do trabalho anterior, como não foram utilizadas as outras paginas do trabalho, decidi exclui-las
-
+    Todo o script utilisado se encontra no fim da pagina
     ADIÇÕES COM O USO DO JAVA SCRIPT:
     Botão para trocar o tema de claro ou escuro;
 
@@ -21,7 +21,6 @@
         <link rel="stylesheet" href="comebackside.css" />
         <link rel="stylesheet" href="rightside.css" />
         <link rel="stylesheet" href="switchButton.css" />
-        <link rel="stylesheet" href="scripts.js" />
     </head>
 
     <body>
@@ -87,55 +86,84 @@
                     <div class="right-down-div">
                         <div class="form-div">
                             <div class="form-top-label">
-                                <label for="registre-se"
-                                    ><b>Registre-se!</b></label
-                                >
+                                <b>Registre-se!</b>
                             </div>
-                            <div class="form-spacing-div">
+                            <form class="form-spacing-div">
                                 <div class="form-control">
                                     <label for="login"><b>Login</b></label>
-                                    <input id="Login" />
+                                    <input
+                                        class="input"
+                                        name="login"
+                                        id="login"
+                                    />
                                 </div>
 
                                 <div class="form-control">
                                     <label for="email"><b>E-mail</b></label>
-                                    <input type="email" id="email" />
+                                    <input
+                                        class="input"
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                    />
                                 </div>
 
                                 <div class="form-control">
                                     <label for="endereco"
                                         ><b>Endereço</b></label
                                     >
-                                    <input type="text" id="endereco" />
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        name="endereco"
+                                        id="endereco"
+                                    />
                                 </div>
 
                                 <div class="form-control">
                                     <label for="telefone"
                                         ><b>Telefone</b></label
                                     >
-                                    <input type="tel" id="telefone" />
+                                    <input
+                                        class="input"
+                                        type="tel"
+                                        name="telefone"
+                                        id="telefone"
+                                    />
                                 </div>
 
                                 <div class="form-control">
                                     <label for="senha"><b>Senha</b></label>
-                                    <input type="password" id="senha" />
+                                    <input
+                                        class="input"
+                                        type="password"
+                                        name="senha"
+                                        id="senha"
+                                    />
                                 </div>
 
                                 <div class="form-control">
-                                    <label for="senha"
+                                    <label for="confirmarSenha"
                                         ><b>Confirmar Senha</b></label
                                     >
                                     <input
+                                        class="input"
                                         type="password"
+                                        name="confirmarSenha"
                                         id="confirmarSenha"
                                     />
                                 </div>
                                 <div class="register-btn-div">
-                                    <button class="register-btn">
-                                        <b>Registrar</b>
+                                    <button
+                                        type="button"
+                                        class="register-btn"
+                                        onclick="salvar()"
+                                    >
+                                        Salvar
                                     </button>
+                                    <a href="./tabela.html">Ver Tabela</a>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -206,7 +234,6 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const themeChoice = document.getElementById("colorChanger");
-            const body = document.body;
             const bgcolor = document.getElementById("bgcolor");
 
             themeChoice.addEventListener("change", function () {
@@ -217,5 +244,43 @@
                 }
             });
         });
+        const login = document.getElementById("login");
+        const email = document.getElementById("email");
+        const endereco = document.getElementById("endereco");
+        const telefone = document.getElementById("telefone");
+        const key = new URLSearchParams(window.location.search).get("chave");
+        var dados = JSON.parse(localStorage.getItem("dados")) || [];
+        function salvar() {
+            let novoLogin = login.value;
+            let novoEmail = email.value;
+            let novoEndereco = endereco.value;
+            let novoTelefone = telefone.value;
+            if (key) {
+                dados[key] = {
+                    login: novoLogin,
+                    email: novoEmail,
+                    endereco: novoEndereco,
+                    telefone: novoTelefone,
+                };
+            } else {
+                dados.push({
+                    login: novoLogin,
+                    email: novoEmail,
+                    endereco: novoEndereco,
+                    telefone: novoTelefone,
+                });
+            }
+
+            localStorage.setItem("dados", JSON.stringify(dados));
+
+            window.location.href = "./index.html";
+        }
+
+        if (key) {
+            login.value = dados[key].login;
+            email.value = dados[key].email;
+            endereco.value = dados[key].endereco;
+            telefone.value = dados[key].telefone;
+        }
     </script>
 </html>

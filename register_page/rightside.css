@@ -34,7 +34,7 @@
     font-family: Arial;
     align-items: center;
 }
-.form-div input {
+.form-div .input {
     background-color: #989898;
     width: 120px;
     padding: 0.3rem;

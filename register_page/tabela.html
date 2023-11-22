@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="../styles/page_title.css" />
         <link rel="icon" href="../assets/logo/icon.jpg" />
         <link rel="stylesheet" href="tabelaStyles.css" />
+        <link rel="stylesheet" href="./switchButton.css" />
     </head>
 
     <body>
@@ -32,16 +33,25 @@
                     </button>
                 </div>
                 <li><a href="../homepage2/index.html">Home</a></li>
-                <li><a href="../report_page/index.html">Relatório</a></li>
+                <li><a href="./tabela.html">Relatório</a></li>
                 <li><a href="../help_page/index.html">Ajuda</a></li>
                 <li><a href="../register_page/index.html">Entrar</a></li>
+                <li>
+                    <div class="switch__container">
+                        <input
+                            id="colorChanger"
+                            class="switch switch--shadow"
+                            type="checkbox"
+                        />
+                        <label for="colorChanger"></label>
+                    </div>
+                </li>
                 <li><a id="cart-btn" href="#">Carrinho</a></li>
             </ul>
         </nav>
-        <main>
+        <main id="bgcolor2">
             <div>
-                <h1 class="page_title">Relatório</h1>
-                <hr />
+                <h1 class="page_title" id="title">Relatório</h1>
             </div>
 
             <div>
@@ -55,10 +65,9 @@
                         <th class="title_database">Ação</th>
                     </tr>
                 </table>
-                <a href="./index.html">Voltar</a>
             </div>
         </main>
-        <div>
+        <footer>
             <div class="footer_top">
                 <ul>
                     <p>Conheça-nos</p>
@@ -117,9 +126,25 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </footer>
     </body>
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const themeChoice = document.getElementById("colorChanger");
+            const bgcolor = document.body;
+            const title = document.getElementById("title");
+
+            themeChoice.addEventListener("change", function () {
+                if (themeChoice.checked) {
+                    bgcolor.classList.add("darktheme");
+                    title.style.color = "white";
+                } else {
+                    bgcolor.classList.remove("darktheme");
+                    title.style.color = "black";
+                }
+            });
+        });
+
         const dados = JSON.parse(localStorage.getItem("dados")) || [];
         const tabela = document.getElementById("tabela");
 

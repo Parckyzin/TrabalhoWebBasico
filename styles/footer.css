@@ -2,7 +2,11 @@
     margin: 0;
     padding: 0;
 }
-
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 .footer_top {
     display: flex;
     justify-content: space-evenly;
